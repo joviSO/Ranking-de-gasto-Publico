@@ -1,0 +1,17 @@
+<p style="color green"><%= notice %></p>
+
+<%= form_with url: import_parliamentarians_path, method: :post do |form| %>
+  <%= form.file_field :file, accept: ".csv" %>
+  <p><%= form.button "Import" %></p> 
+<% end %>
+
+<h1> 
+  Deputados: <%= @parliamentarians.count%>
+</h1>
+
+<div id="parliamentarians">
+  <% @parliamentarians.each do |parliamentarian| %>
+    <%= render parliamentarian %>
+  <% end %>
+</div>
+  
