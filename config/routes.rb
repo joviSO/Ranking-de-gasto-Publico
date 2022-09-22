@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root to: redirect("/congressmen")
-  resources :congressmen do
+  root to: redirect("/parliamentarians")
+  resources :parliamentarians do
     collection do
       post :import
     end
