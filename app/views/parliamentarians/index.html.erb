@@ -1,31 +1,29 @@
-<p style="color green"><%= notice %></p>
-
 <body>
   <%= form_with url: import_parliamentarians_path, method: :post do |form| %>
     <%= form.file_field :file, accept: ".csv" %>
     <p><%= form.button "Import" %></p> 
-
-    <button type="button" class="btn btn-primary">primary</button>
   <% end %>
 
-  <h1> 
+  <h2> 
     Deputados: <%= @parliamentarians.count%>
-  </h1>
+  </h2>
 
-  <% parliamentarians = [] %>
+  <%# parliamentarians = [] %>
 
-  <% @parliamentarians.each do |parliamentarian| %>
-    <% parliamentarians <<  { nome: parliamentarian.txNomeParlamentar, soma: parliamentarian.budgets.sum(:vlrLiquido).round(2) } %>
-  <% end %>
+  <%# @parliamentarians.each do |parliamentarian| %>
+    <%# parliamentarians <<  { nome: parliamentarian.txNomeParlamentar, soma: parliamentarian.budgets.sum(:vlrLiquido).round(2) } %>
+  <%# end %>
 
-  <%= column_chart parliamentarians.pluck(:nome, :soma), xtitle: "Nome", ytitle: "Gasto" %>
+  <%#= column_chart parliamentarians.pluck(:nome, :soma), xtitle: "Nome", ytitle: "Gasto" %>
 
   <div id="parliamentarians">
+   <%= paginate @parliamentarians %>
     <div class="container">
       <div class="row gap-4 justify-content-center">
         <% @parliamentarians.each do |parliamentarian| %>
           <%= render parliamentarian %>
         <% end %>
+      <%= paginate @parliamentarians %>
       </div>
     </div>
   </div>

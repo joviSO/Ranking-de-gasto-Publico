@@ -2,16 +2,69 @@
 
 <body>
   <h1> 
-    Quantidade de Gastos: <%= @budgets.count%>
+    Quantidade de Notas Fiscais: <%= @budgets_total.count%>
   </h1>
 
   <div id="gastos">
     <div class="container">
+      <% budgets = @budgets_total.first.parliamentarian %>
+      <div class="row justify-content-between">
+        <div class="col-4 mb-4 card bg-secondary shadow-sm p-4">
+          <div class="d-flex">
+          <%= image_tag("https://www.camara.leg.br/internet/deputado/bandep/#{budgets.ideCadastro}.jpg", alt: "rss feed", class: "w-25 h-auto mb-2") %>
+            <div class="ml-2">
+              <p>
+                <strong> Nome: </strong>
+                <strong>
+                  <%= budgets.txNomeParlamentar%>
+                </strong>
+              </p>
+              <p>
+                <strong>valor total gasto:</strong>
+                <%= @budgets_total.sum(:vlrLiquido).round(2) %>
+              </p>
+              <p>
+              <strong> Codigo de inscrição: </strong>
+                <%= budgets.ideCadastro%>
+              </p>
+              <p>
+                <strong>Estado:</strong>
+                <%= budgets.sgUF %>
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-7 mb-4 card bg-success shadow-sm p-4">
+          <div class="row">
+            <h3>Nota Fiscal mais alta</h3>
+            <strong> Valor </strong>
+            <%= @budgets_total.order(:vlrLiquido).last.vlrLiquido %>
+            <strong> Nome do fornecedor </strong>
+            <%= @budgets_total.order(:vlrLiquido).last.txtFornecedor %>
+            <strong> Data de emissão </strong>
+            <%= @budgets_total.order(:vlrLiquido).last.datEmissao.to_date %>
+            <strong> Nota Fiscal </strong>
+            <%= link_to @budgets_total.order(:vlrLiquido).last.urlDocumento, @budgets_total.order(:vlrLiquido).last.urlDocumento, class: "text-body text-decoration-none"%>
+          </div>
+        </div>
+      </div>
+      <%= paginate @budgets %>
       <div class="row gap-4 justify-content-center">
         <% @budgets.each do |budget| %>
-          <%= render budget %>
+          <div id="<%= dom_id budget %>" class="card bg-secondary shadow-sm p-4" >  
+            <strong> Valor </strong>
+            <%= budget.vlrLiquido %>
+            <strong> Nome do fornecedor </strong>
+            <%= budget.txtFornecedor %>
+            <strong> Data de emissão </strong>
+            <%= budget.datEmissao.to_date %>
+            <strong> Nota Fiscal </strong>
+            <%= link_to budget.urlDocumento, budget.urlDocumento, class: "text-body text-decoration-none"%>
+          </div>
         <% end %>
       </div>
+      <%= paginate @budgets %>
     </div>
   </div>
 </body>

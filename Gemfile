@@ -61,3 +61,4 @@ gem 'simple_form'
 gem 'bootstrap'
 gem "groupdate"
 gem 'chartkick'
+gem 'kaminari'

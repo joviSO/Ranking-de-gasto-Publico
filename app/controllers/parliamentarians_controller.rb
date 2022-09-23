@@ -1,6 +1,8 @@
-class ParliamentariansController < ApplicationController  
+class ParliamentariansController < ApplicationController 
+  before_action :set_parliamentarian, except: %i[index]  
+
   def index
-    @parliamentarians = Parliamentarian.all
+    @parliamentarians = Parliamentarian.order(:id).page(params[:page]).per(10)
   end
 
   def import
@@ -13,18 +15,22 @@ class ParliamentariansController < ApplicationController
   end
 
   def gastos
-    @budgets = Budget.where(parliamentarian_id: parliamentarian_params[:id])
+    @budgets_total = Budget.where(parliamentarian_id: @parliamentarian)
+    @budgets = Budget.where(parliamentarian_id: @parliamentarian).page(params[:page]).per(10)
   end
   
   private
     def parliamentarian_params
-      params.require(:parliamentarian)
-            .permit(
+      params.permit(
               :id,
               :txNomeParlamentar,
               :ideCadastro,
               :sgUF
             )
+    end
+
+    def set_parliamentarian
+      @parliamentarian = Parliamentarian.find(params[:id])
     end
 
     def budget_params
