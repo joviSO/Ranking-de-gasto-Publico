@@ -1,12 +1,13 @@
 <body>
   <%= form_with url: import_parliamentarians_path, method: :post do |form| %>
     <%= form.file_field :file, accept: ".csv" %>
+    <p style="color green"><%= notice %></p>
     <p><%= form.button "Import" %></p> 
   <% end %>
 
-  <h2> 
-    Deputados: <%= @parliamentarians.count%>
-  </h2>
+  <h3> 
+    Deputados carregados: <%= @parliamentarians_total.count%>
+  </h3>
 
   <%# parliamentarians = [] %>
 
