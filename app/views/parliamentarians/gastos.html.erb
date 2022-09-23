@@ -1,0 +1,17 @@
+<p style="color green"><%= notice %></p>
+
+<body>
+  <h1> 
+    Quantidade de Gastos: <%= @budgets.count%>
+  </h1>
+
+  <div id="gastos">
+    <div class="container">
+      <div class="row gap-4 justify-content-center">
+        <% @budgets.each do |budget| %>
+          <%= render budget %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

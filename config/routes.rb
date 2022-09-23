@@ -3,6 +3,14 @@ Rails.application.routes.draw do
   resources :parliamentarians do
     collection do
       post :import
+      get :gastos, as: :gastos
+    end
+  end
+
+  resources :budget do
+    collection do
+      get :gastos, to: 'budgets#gastos', as: :gastos
+
     end
   end
 

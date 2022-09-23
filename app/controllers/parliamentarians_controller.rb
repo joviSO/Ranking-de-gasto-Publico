@@ -1,4 +1,4 @@
-class ParliamentariansController < ApplicationController
+class ParliamentariansController < ApplicationController  
   def index
     @parliamentarians = Parliamentarian.all
   end
@@ -10,6 +10,10 @@ class ParliamentariansController < ApplicationController
     ParliamentarianService::Importer.new.call(file)
 
     redirect_to parliamentarians_path, notice: 'Deputados importados!'
+  end
+
+  def gastos
+    @budgets = Budget.where(parliamentarian_id: parliamentarian_params[:id])
   end
   
   private
