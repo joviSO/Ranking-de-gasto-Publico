@@ -1,3 +1,17 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: redirect("/parliamentarians")
+  resources :parliamentarians do
+    collection do
+      post :import
+      get "gastos", to: "parliamentarians#gastos", as: :gastos
+    end
+  end
+
+  resources :budget do
+    collection do
+      get :gastos, to: 'budgets#gastos', as: :gastos
+
+    end
+  end
+
 end

@@ -1,0 +1,22 @@
+<%= link_to gastos_parliamentarians_path(id: parliamentarian.id), class: "col-3 text-body text-decoration-none" do %>
+  <div id="<%= dom_id parliamentarian %>" class="card bg-secondary shadow-sm p-4" >
+
+  <%= image_tag("https://www.camara.leg.br/internet/deputado/bandep/#{parliamentarian.ideCadastro}.jpg", alt: "rss feed", class: "w-25 h-auto mb-2") %>
+  <p>
+    <strong>nome:</strong>
+    <%= parliamentarian.txNomeParlamentar %>
+  </p>
+  <p>
+    <strong>valor total gasto:</strong>
+    <%= parliamentarian.budgets.sum(:vlrLiquido).round(2) %>
+  </p>
+  <p>
+    <strong>Codigo de inscrição:</strong>
+    <%= parliamentarian.ideCadastro %>
+  </p>
+  <p>
+    <strong>Estado:</strong>
+    <%= parliamentarian.sgUF %>
+  </p>
+  </div>
+<% end %>
