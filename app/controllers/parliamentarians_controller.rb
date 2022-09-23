@@ -1,17 +1,22 @@
 class ParliamentariansController < ApplicationController 
-  before_action :set_parliamentarian, except: %i[index]  
+  before_action :set_parliamentarian, only: %i[gastos]  
 
   def index
+    @parliamentarians_total = Parliamentarian.all
     @parliamentarians = Parliamentarian.order(:id).page(params[:page]).per(10)
   end
 
   def import
     file = params[:file]
-    return redirect_to users_path, notice: 'Apenas CSV por favor' unless file.content_type == 'text/csv'
-
-    ParliamentarianService::Importer.new.call(file)
-
-    redirect_to parliamentarians_path, notice: 'Deputados importados!'
+    unless file.nil?
+      return redirect_to users_path, notice: 'Apenas CSV por favor' unless file.content_type == 'text/csv'
+  
+      ParliamentarianService::Importer.new.call(file)
+  
+      redirect_to parliamentarians_path
+    else
+      return redirect_to parliamentarians_path, notive: 'Por favor insira um CSV' 
+    end
   end
 
   def gastos

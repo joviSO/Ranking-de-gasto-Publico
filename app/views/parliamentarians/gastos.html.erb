@@ -1,9 +1,9 @@
 <p style="color green"><%= notice %></p>
 
 <body>
-  <h1> 
-    Quantidade de Notas Fiscais: <%= @budgets_total.count%>
-  </h1>
+  <h3> 
+    Quantidade de Notas Fiscais carregadas: <%= @budgets_total.count%>
+  </h3>
 
   <div id="gastos">
     <div class="container">
@@ -52,7 +52,7 @@
       <%= paginate @budgets %>
       <div class="row gap-4 justify-content-center">
         <% @budgets.each do |budget| %>
-          <div id="<%= dom_id budget %>" class="card bg-secondary shadow-sm p-4" >  
+          <div id="<%= dom_id budget %>" class="card bg-info shadow-sm p-4" >  
             <strong> Valor </strong>
             <%= budget.vlrLiquido %>
             <strong> Nome do fornecedor </strong>
