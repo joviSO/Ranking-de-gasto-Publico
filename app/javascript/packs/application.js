@@ -8,6 +8,17 @@ import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
+import "bootstrap/dist/js/bootstrap"
+
+import "stylesheets/application.scss"
+
+import "chartkick/chart.js"
+import "chartkick"
+
+require("chartkick")
+require("chart.js")
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+Chartkick.start()

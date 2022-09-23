@@ -1,17 +1,32 @@
 <p style="color green"><%= notice %></p>
 
-<%= form_with url: import_parliamentarians_path, method: :post do |form| %>
-  <%= form.file_field :file, accept: ".csv" %>
-  <p><%= form.button "Import" %></p> 
-<% end %>
+<body>
+  <%= form_with url: import_parliamentarians_path, method: :post do |form| %>
+    <%= form.file_field :file, accept: ".csv" %>
+    <p><%= form.button "Import" %></p> 
 
-<h1> 
-  Deputados: <%= @parliamentarians.count%>
-</h1>
-
-<div id="parliamentarians">
-  <% @parliamentarians.each do |parliamentarian| %>
-    <%= render parliamentarian %>
+    <button type="button" class="btn btn-primary">primary</button>
   <% end %>
-</div>
-  
+
+  <h1> 
+    Deputados: <%= @parliamentarians.count%>
+  </h1>
+
+  <% parliamentarians = [] %>
+
+  <% @parliamentarians.each do |parliamentarian| %>
+    <% parliamentarians <<  { nome: parliamentarian.txNomeParlamentar, soma: parliamentarian.budgets.sum(:vlrLiquido).round(2) } %>
+  <% end %>
+
+  <%= column_chart parliamentarians.pluck(:nome, :soma), xtitle: "Nome", ytitle: "Gasto" %>
+
+  <div id="parliamentarians">
+    <div class="container">
+      <div class="row gap-4 justify-content-center">
+        <% @parliamentarians.each do |parliamentarian| %>
+          <%= render parliamentarian %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

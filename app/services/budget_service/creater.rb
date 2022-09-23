@@ -8,6 +8,10 @@ class BudgetService::Creater < ApplicationService
     budget_hash[:urlDocumento] = urlDocumento
     budget_hash[:datEmissao] = datEmissao
 
-    Budget.find_or_create_by!(budget_hash)      
+    Budget.find_or_create_by!(budget_hash)
+
+    { success: true, message: "Gastos registrados com sucesso" }
+  rescue StandardError => e
+    { success: false, error: e.message  }    
   end
 end

@@ -11,11 +11,16 @@ class ParliamentariansController < ApplicationController
 
     redirect_to parliamentarians_path, notice: 'Deputados importados!'
   end
-
+  
   private
     def parliamentarian_params
       params.require(:parliamentarian)
-            .permit!
+            .permit(
+              :id,
+              :txNomeParlamentar,
+              :ideCadastro,
+              :sgUF
+            )
     end
 
     def budget_params
