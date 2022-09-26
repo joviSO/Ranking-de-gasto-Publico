@@ -3,7 +3,7 @@
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Ruby](https://www.ruby-lang.org/pt/), [Rbenv](https://github.com/rbenv/rbenv) ou [RMV] (https://rvm.io). 
+[Git](https://git-scm.com), [Ruby](https://www.ruby-lang.org/pt/), [Rbenv](https://github.com/rbenv/rbenv) ou [RMV](https://rvm.io). 
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 Certifique-se que a versão do Ruby instalada seja a 3.0.0 
@@ -15,7 +15,6 @@ $ rbenv versions
 
 ### 🎲 Rodando o Programa
 
-```bash
 # Clone este repositório
 $ git clone <git@github.com:joviSO/Ranking-de-gasto-Publico.git>
 $ git clone <https://github.com/joviSO/Ranking-de-gasto-Publico.git>
